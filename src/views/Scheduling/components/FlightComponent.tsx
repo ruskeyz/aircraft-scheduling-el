@@ -11,12 +11,28 @@ export default function FlightComponent({ flights }: FlightComponentProps) {
           Flights
         </div>
       </div>
-      <dl className="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+      <dl className="divide-y divide-gray-100 text-sm leading-6">
         {flights.map((flight) => {
           return (
-            <div className="flex justify-between gap-x-4 py-3">
-              <dt className="text-gray-500">{flight.ident}</dt>
-              <dd className="text-gray-700">(58%)</dd>
+            <div
+              key={flight.ident}
+              className="flex flex-col hover:cursor-pointer hover:bg-gray-100 justify-between items-center py-3"
+            >
+              <p className="text-gray-500">{flight.ident}</p>
+              <div className="px-2 py-3 flex justify-end space-x-20">
+                <dt className="text-sm text-gray-700">{flight.origin}</dt>
+                <dd className="text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+                  {flight.destination}
+                </dd>
+              </div>
+              <div className="px-2 py-3 flex justify-end space-x-20">
+                <dt className="text-sm text-gray-700">
+                  {flight.readable_departure}
+                </dt>
+                <dd className="text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+                  {flight.readable_arrival}
+                </dd>
+              </div>
             </div>
           );
         })}

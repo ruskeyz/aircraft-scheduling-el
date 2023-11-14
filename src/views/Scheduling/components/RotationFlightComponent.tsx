@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Flights } from "../SchedulingView.types";
 
 interface RotationFlightComponentProps {
@@ -16,12 +17,32 @@ export default function RotationFlightComponent({
           Rotation {flightIdent}
         </div>
       </div>
-      <dl className="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">
+      <dl className="divide-y divide-gray-100 text-sm leading-6">
         {rotations.map((rotation) => {
           return (
-            <div className="flex justify-between gap-x-4 py-3">
-              <dt className="text-gray-500">{rotation.ident}</dt>
-              <dd className="text-gray-700">(58%)</dd>
+            <div
+              key={rotation.ident}
+              className="flex flex-col hover:cursor-pointer hover:bg-gray-100 items-center py-3"
+            >
+              <p className="text-gray-500">{rotation.ident}</p>
+              <div className="px-2 py-3 flex space-x-52">
+                <dt className="text-sm text-gray-700">{rotation.origin}</dt>
+                <dd className="text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+                  {rotation.destination}
+                </dd>
+              </div>
+              <div>
+                {" "}
+                <ArrowRightIcon className="h-10 w-10" />
+              </div>
+              <div className="px-2 py-3 flex justify-end space-x-52">
+                <dt className="text-sm text-gray-700">
+                  {rotation.readable_departure}
+                </dt>
+                <dd className="text-sm text-gray-700 sm:col-span-2 sm:mt-0">
+                  {rotation.readable_arrival}
+                </dd>
+              </div>
             </div>
           );
         })}

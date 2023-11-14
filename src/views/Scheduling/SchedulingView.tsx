@@ -1,36 +1,21 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Aircrafts, Flights } from "./SchedulingView.types";
+import { Aircrafts } from "./SchedulingView.types";
 import AircraftComponent from "./components/AircraftComponent";
 import FlightComponent from "./components/FlightComponent";
 import RotationFlightComponent from "./components/RotationFlightComponent";
+import { flights } from "./flightsData";
+import { useState } from "react";
 
 const aircrafts: Aircrafts[] = [
   { ident: "AS1001", type: "A320", economySeats: 100, base: "EGKK" },
   { ident: "AS1002", type: "A320", economySeats: 186, base: "EGKK" },
 ];
-const flights: Flights[] = [
-  {
-    ident: "AS1001",
-    departuretime: 21600,
-    arrivaltime: 26100,
-    readable_departure: "06:00",
-    readable_arrival: "07:15",
-    origin: "LFSB",
-    destination: "LFMN",
-  },
-  {
-    ident: "AS1002",
-    departuretime: 27900,
-    arrivaltime: 32100,
-    readable_departure: "07:45",
-    readable_arrival: "08:55",
-    origin: "LFMN",
-    destination: "LFSB",
-  },
-];
 
 export default function SchedulingView() {
-  console.log(aircrafts, flights);
+  const [selectAircraft, setSelectAircraft] = useState("");
+
+  const filterByPlane = (query: string) => {};
+
   return (
     <>
       <div className="my-4 flex items-center justify-center space-x-4">
@@ -39,11 +24,16 @@ export default function SchedulingView() {
         <ArrowRightIcon className="h-5 w-5" />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-1">
-        <AircraftComponent aircrafts={aircrafts} />
+        <AircraftComponent
+          aircrafts={aircrafts}
+          utilNumber={59}
+          selectAircraft={selectAircraft}
+          setSelectAircraft={setSelectAircraft}
+        />
         {flights ? (
           <RotationFlightComponent
-            rotations={flights}
-            flightIdent={flights[0].ident}
+            rotations={[]}
+            flightIdent={selectAircraft}
           />
         ) : null}
         <FlightComponent flights={flights} />
