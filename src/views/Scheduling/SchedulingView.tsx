@@ -1,20 +1,17 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Aircrafts } from "./SchedulingView.types";
+import { Flights } from "./SchedulingView.types";
 import AircraftComponent from "./components/AircraftComponent";
 import FlightComponent from "./components/FlightComponent";
 import RotationFlightComponent from "./components/RotationFlightComponent";
-import { flights } from "./flightsData";
+import { flightsData } from "./flightsData";
 import { useState } from "react";
-
-const aircrafts: Aircrafts[] = [
-  { ident: "AS1001", type: "A320", economySeats: 100, base: "EGKK" },
-  { ident: "AS1002", type: "A320", economySeats: 186, base: "EGKK" },
-];
+import { aircrafts } from "./aircraftData";
 
 export default function SchedulingView() {
   const [selectAircraft, setSelectAircraft] = useState("");
-
-  const filterByPlane = (query: string) => {};
+  const [flights, setFlights] = useState<Flights[]>(flightsData);
+  const [filteredFlights, setFilteredFlights] = useState<Flights[]>([]);
+  const [rotations, setRotations] = useState<Flights[]>([]);
 
   return (
     <>
@@ -29,14 +26,23 @@ export default function SchedulingView() {
           utilNumber={59}
           selectAircraft={selectAircraft}
           setSelectAircraft={setSelectAircraft}
+          flights={flights}
+          setFilteredFlights={setFilteredFlights}
+          rotations={rotations}
+          setRotations={setRotations}
         />
-        {flights ? (
+        {flightsData ? (
           <RotationFlightComponent
-            rotations={[]}
+            rotations={rotations}
             flightIdent={selectAircraft}
           />
         ) : null}
-        <FlightComponent flights={flights} />
+        <FlightComponent
+          filteredFlights={filteredFlights}
+          setFilteredFlights={setFilteredFlights}
+          rotations={rotations}
+          setRotations={setRotations}
+        />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-2 my-4">
         <div className="col-span-2 col-start-2 border-b border-gray-700">

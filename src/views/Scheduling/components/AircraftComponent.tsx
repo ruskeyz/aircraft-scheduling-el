@@ -1,22 +1,34 @@
 import { SetStateAction } from "react";
-import { Aircrafts } from "../SchedulingView.types";
+import { Aircrafts, Flights } from "../SchedulingView.types";
+import filterFlightsByIdent from "../helpers/filterByIdent";
 
 interface AircraftComponentProps {
   aircrafts: Aircrafts[];
   utilNumber: number;
   selectAircraft: string;
   setSelectAircraft: React.Dispatch<SetStateAction<string>>;
+  flights: Flights[];
+  setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
+  rotations: Flights[];
+  setRotations: React.Dispatch<SetStateAction<Flights[]>>;
 }
 export default function AircraftComponent({
   aircrafts,
   utilNumber,
   selectAircraft,
   setSelectAircraft,
+  flights,
+  setFilteredFlights,
+  rotations,
+  setRotations,
 }: AircraftComponentProps) {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.currentTarget.value);
-    setSelectAircraft(e.currentTarget.value);
+    const selected = e.currentTarget.value;
+    setSelectAircraft(selected);
+    setFilteredFlights(filterFlightsByIdent(flights, selected));
+    setRotations(rotations.filter((r) => r.ident === selected));
   };
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200">
       <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
