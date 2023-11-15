@@ -1,4 +1,5 @@
 import { Flights } from "../SchedulingView.types";
+import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 export default function filterFlightsByConstraints(
   flights: Flights[],
@@ -15,13 +16,9 @@ export default function filterFlightsByConstraints(
   );
 
   // cannot take flights after midnight
-  const midnight = 86400;
   const filterByMidnight = filterByTime.filter(
-    (filterFlight) => filterFlight.arrivaltime < midnight
+    (filterFlight) => filterFlight.arrivaltime < APP_CONSTANTS.MIDNIGHT
   );
-
-  //filterFlight.arrivaltime >= flight.arrivaltime &&
-  //filterFlight.departuretime <= flight.departuretime;
 
   const res = filterByMidnight;
   return res;
