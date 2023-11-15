@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { Flights } from "../SchedulingView.types";
+import { Flights, TimelineData } from "../SchedulingView.types";
 import filterFlightsByConstraints from "../helpers/filterFlightsByConstraints";
 
 interface FlightComponentProps {
@@ -10,6 +10,8 @@ interface FlightComponentProps {
   setRotations: React.Dispatch<SetStateAction<Flights[]>>;
   utilNumber: number[];
   setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
+  timelineData: TimelineData[];
+  setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
 const calculatePercentage = (partialValue: number, totalValue: number) => {
   return (100 * partialValue) / totalValue;
@@ -22,6 +24,8 @@ export default function FlightComponent({
   setRotations,
   utilNumber,
   setUtilNumber,
+  timelineData,
+  setTimelineData,
 }: FlightComponentProps) {
   const handleClick = (flight: Flights) => {
     // make sure only one flight is there
@@ -33,12 +37,32 @@ export default function FlightComponent({
       filterFlightsByConstraints(flights, destination, arrivaltime)
     );
     const range: number = flight.arrivaltime - flight.departuretime;
+    console.log(range, "RANGE");
     //calculatePercentage
     setUtilNumber([
       ...utilNumber,
       parseInt(calculatePercentage(range, 86400).toFixed(0)),
     ]);
-    console.log(utilNumber, "here");
+
+    // set timelineData
+    setTimelineData([
+      ...timelineData,
+      {
+        turnaround: true,
+        departureTime: flight.departuretime - 1200,
+        arrivalTime: flight.arrivaltime - 1200,
+      },
+      {
+        turnaround: false,
+        departureTime: flight.departuretime,
+        arrivalTime: flight.arrivaltime,
+      },
+      {
+        turnaround: true,
+        departureTime: flight.departuretime + 1200,
+        arrivalTime: flight.arrivaltime + 1200,
+      },
+    ]);
   };
 
   return (

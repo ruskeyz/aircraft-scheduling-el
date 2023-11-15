@@ -1,11 +1,12 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Flights } from "./SchedulingView.types";
+import { Flights, TimelineData } from "./SchedulingView.types";
 import AircraftComponent from "./components/AircraftComponent";
 import FlightComponent from "./components/FlightComponent";
 import RotationFlightComponent from "./components/RotationFlightComponent";
 import { flightsData } from "./flightsData";
 import { useState } from "react";
 import { aircrafts } from "./aircraftData";
+import TimelineBar from "./components/Bar";
 
 export default function SchedulingView() {
   const [selectAircraft, setSelectAircraft] = useState("");
@@ -13,6 +14,7 @@ export default function SchedulingView() {
   const [filteredFlights, setFilteredFlights] = useState<Flights[]>([]);
   const [rotations, setRotations] = useState<Flights[]>([]);
   const [utilNumber, setUtilNumber] = useState<number[]>([]);
+  const [timelineData, setTimelineData] = useState<TimelineData[]>([]);
 
   return (
     <>
@@ -48,11 +50,27 @@ export default function SchedulingView() {
           setRotations={setRotations}
           utilNumber={utilNumber}
           setUtilNumber={setUtilNumber}
+          timelineData={timelineData}
+          setTimelineData={setTimelineData}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-2 my-4">
         <div className="col-span-2 col-start-2 border-b border-gray-700">
-          Timeline:
+          <div className="relative">
+            <div
+              className="absolute inset-0 flex items-center"
+              aria-hidden="true"
+            >
+              <div className="w-full border-t border-gray-300" />
+            </div>
+
+            <div className="relative flex justify-between">
+              <span className="bg-white pr-2 text-sm text-gray-500">00:00</span>
+              <span className="bg-white pr-2 text-sm text-gray-500">12:00</span>
+              <span className="bg-white pl-2 text-sm text-gray-500">24:00</span>
+            </div>
+          </div>
+          <TimelineBar timelineData={timelineData} />
         </div>
       </div>
     </>

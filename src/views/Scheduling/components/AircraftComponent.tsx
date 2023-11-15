@@ -1,6 +1,7 @@
 import { SetStateAction } from "react";
-import { Aircrafts, Flights } from "../SchedulingView.types";
+import { Aircrafts, ChartData, Flights } from "../SchedulingView.types";
 import filterFlightsByIdent from "../helpers/filterByIdent";
+import { initChartData } from "../SchedulingView";
 
 interface AircraftComponentProps {
   aircrafts: Aircrafts[];

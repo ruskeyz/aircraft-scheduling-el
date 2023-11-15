@@ -13,3 +13,8 @@ export interface Flights {
   origin: string;
   destination: string;
 }
+export interface TimelineData {
+  turnaround: boolean;
+  departureTime: number;
+  arrivalTime: number;
+}
