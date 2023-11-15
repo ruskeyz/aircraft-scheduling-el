@@ -1,15 +1,28 @@
 import { Flights } from "../SchedulingView.types";
 
-interface FilterFlightsByConstraintsProps {
-  filteredFlights: Flights[];
-  destination: string;
-}
+export default function filterFlightsByConstraints(
+  flights: Flights[],
+  destination: string,
+  arrivalTime: number
+): Flights[] {
+  // filter flights to match the destination
+  const filterByDest = flights.filter(
+    (filterFlight) => filterFlight.origin === destination
+  );
+  // get the list that departs after arrivalTime
+  const filterByTime = filterByDest.filter(
+    (filterFlight) => filterFlight.departuretime > arrivalTime
+  );
 
-export default function filterFlightsByConstraints({
-  filteredFlights,
-  destination,
-}: FilterFlightsByConstraintsProps) {
-  // TODO think of new filter
-  // TODO add timeline constraints
-  return filteredFlights.filter((flight) => flight.destination === destination);
+  // cannot take flights after midnight
+  const midnight = 86400;
+  const filterByMidnight = filterByTime.filter(
+    (filterFlight) => filterFlight.arrivaltime < midnight
+  );
+
+  //filterFlight.arrivaltime >= flight.arrivaltime &&
+  //filterFlight.departuretime <= flight.departuretime;
+
+  const res = filterByMidnight;
+  return res;
 }

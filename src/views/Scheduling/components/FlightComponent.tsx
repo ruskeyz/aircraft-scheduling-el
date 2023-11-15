@@ -1,13 +1,16 @@
 import { SetStateAction } from "react";
 import { Flights } from "../SchedulingView.types";
+import filterFlightsByConstraints from "../helpers/filterFlightsByConstraints";
 
 interface FlightComponentProps {
+  flights: Flights[];
   filteredFlights: Flights[];
   setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
   rotations: Flights[];
   setRotations: React.Dispatch<SetStateAction<Flights[]>>;
 }
 export default function FlightComponent({
+  flights,
   filteredFlights,
   setFilteredFlights,
   rotations,
@@ -16,8 +19,19 @@ export default function FlightComponent({
   const handleClick = (flight: Flights) => {
     console.log(flight);
     // TODO make sure only one flight is there
-    setRotations([...rotations, flight]);
-    setFilteredFlights(filteredFlights.filter((f) => f.ident !== flight.ident));
+    if (rotations.indexOf(flight) === -1) {
+      setRotations([...rotations, flight]);
+    }
+    const { destination, arrivaltime, departuretime } = flight;
+    setFilteredFlights(
+      filterFlightsByConstraints(
+        flights,
+        destination,
+        arrivaltime,
+        departuretime
+      )
+    );
+    //setFilteredFlights(filteredFlights.filter((f) => f.ident !== flight.ident));
   };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200">

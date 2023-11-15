@@ -38,6 +38,7 @@ export default function SchedulingView() {
           />
         ) : null}
         <FlightComponent
+          flights={flights}
           filteredFlights={filteredFlights}
           setFilteredFlights={setFilteredFlights}
           rotations={rotations}
