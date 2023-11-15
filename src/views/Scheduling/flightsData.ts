@@ -1,13 +1,13 @@
 import { Flights } from "./SchedulingView.types";
 
-export const flights: Flights[] = [
+export const flightsData: Flights[] = [
   {
     ident: "AS1001",
     departuretime: 21600,
     arrivaltime: 26100,
     readable_departure: "06:00",
     readable_arrival: "07:15",
-    origin: "EGKK",
+    origin: "LFSB",
     destination: "LFMN",
   },
   {
