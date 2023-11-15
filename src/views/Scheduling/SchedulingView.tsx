@@ -6,7 +6,8 @@ import RotationFlightComponent from "./components/RotationFlightComponent";
 import { flightsData } from "./flightsData";
 import { useState } from "react";
 import { aircrafts } from "./aircraftData";
-import TimelineBar from "./components/Bar";
+import TimelineBar from "./components/TimeLineBar";
+import TimelineBarTitle from "./components/TimelineBarTitle";
 
 export default function SchedulingView() {
   const [selectAircraft, setSelectAircraft] = useState("");
@@ -55,21 +56,8 @@ export default function SchedulingView() {
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-2 my-4">
-        <div className="col-span-2 col-start-2 border-b border-gray-700">
-          <div className="relative">
-            <div
-              className="absolute inset-0 flex items-center"
-              aria-hidden="true"
-            >
-              <div className="w-full border-t border-gray-300" />
-            </div>
-
-            <div className="relative flex justify-between">
-              <span className="bg-white pr-2 text-sm text-gray-500">00:00</span>
-              <span className="bg-white pr-2 text-sm text-gray-500">12:00</span>
-              <span className="bg-white pl-2 text-sm text-gray-500">24:00</span>
-            </div>
-          </div>
+        <div className="col-span-2 col-start-2">
+          <TimelineBarTitle />
           <TimelineBar timelineData={timelineData} />
         </div>
       </div>

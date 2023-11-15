@@ -12,7 +12,7 @@ export default function TimelineBar({ timelineData }: TimelineBarProps) {
   };
 
   return (
-    <div className="relative h-8 bg-gray-300">
+    <div className="relative h-8 bg-gray-100 rounded-md">
       {timelineData.map(({ departureTime, arrivalTime, turnaround }, index) => {
         const departurePercentage = calculatePercentage(departureTime);
         const arrivalPercentage = calculatePercentage(arrivalTime);
