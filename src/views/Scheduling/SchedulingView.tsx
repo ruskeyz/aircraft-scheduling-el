@@ -12,6 +12,7 @@ export default function SchedulingView() {
   const [flights, setFlights] = useState<Flights[]>(flightsData);
   const [filteredFlights, setFilteredFlights] = useState<Flights[]>([]);
   const [rotations, setRotations] = useState<Flights[]>([]);
+  const [utilNumber, setUtilNumber] = useState<number[]>([]);
 
   return (
     <>
@@ -23,13 +24,15 @@ export default function SchedulingView() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-1">
         <AircraftComponent
           aircrafts={aircrafts}
-          utilNumber={59}
+          utilNumber={utilNumber}
           selectAircraft={selectAircraft}
           setSelectAircraft={setSelectAircraft}
           flights={flights}
+          setFlights={setFlights}
           setFilteredFlights={setFilteredFlights}
           rotations={rotations}
           setRotations={setRotations}
+          setUtilNumber={setUtilNumber}
         />
         {flightsData ? (
           <RotationFlightComponent
@@ -43,6 +46,8 @@ export default function SchedulingView() {
           setFilteredFlights={setFilteredFlights}
           rotations={rotations}
           setRotations={setRotations}
+          utilNumber={utilNumber}
+          setUtilNumber={setUtilNumber}
         />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 grid-rows-2 my-4">

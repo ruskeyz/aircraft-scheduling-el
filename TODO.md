@@ -1,10 +1,11 @@
 TODO
 
 ### Filter flight logic
-- filter by ident (from aircraft) done
-- filter by destination and time (from flights)
-- further filter by dest and time
+- filter by ident (from aircraft) -done
+- filter by destination and time (from flights) - done
   - keep original flight data - done
   - show only filtered flight data - done
-  - on flight click -> add to arr, handle filter
-- Assumption: clicking on new aircraft clears rotation for a new aircraft
+- Assumption: clicking on new aircraft clears rotation for a new aircraft - done
+- Removal from rotations and resetting of logic
+- Timeframe horizontal bar
+- Calculate % util, how to update

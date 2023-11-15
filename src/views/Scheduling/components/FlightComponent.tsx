@@ -8,31 +8,39 @@ interface FlightComponentProps {
   setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
   rotations: Flights[];
   setRotations: React.Dispatch<SetStateAction<Flights[]>>;
+  utilNumber: number[];
+  setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
 }
+const calculatePercentage = (partialValue: number, totalValue: number) => {
+  return (100 * partialValue) / totalValue;
+};
 export default function FlightComponent({
   flights,
   filteredFlights,
   setFilteredFlights,
   rotations,
   setRotations,
+  utilNumber,
+  setUtilNumber,
 }: FlightComponentProps) {
   const handleClick = (flight: Flights) => {
-    console.log(flight);
-    // TODO make sure only one flight is there
+    // make sure only one flight is there
     if (rotations.indexOf(flight) === -1) {
       setRotations([...rotations, flight]);
     }
-    const { destination, arrivaltime, departuretime } = flight;
+    const { destination, arrivaltime } = flight;
     setFilteredFlights(
-      filterFlightsByConstraints(
-        flights,
-        destination,
-        arrivaltime,
-        departuretime
-      )
+      filterFlightsByConstraints(flights, destination, arrivaltime)
     );
-    //setFilteredFlights(filteredFlights.filter((f) => f.ident !== flight.ident));
+    const range: number = flight.arrivaltime - flight.departuretime;
+    //calculatePercentage
+    setUtilNumber([
+      ...utilNumber,
+      parseInt(calculatePercentage(range, 86400).toFixed(0)),
+    ]);
+    console.log(utilNumber, "here");
   };
+
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200">
       <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
