@@ -10,6 +10,13 @@ export default function RotationFlightComponent({
   rotations,
   flightIdent,
 }: RotationFlightComponentProps) {
+  const handleClick = (rotation: Flights) => {
+    console.log(rotation);
+    // delete from rotations
+    // update flights
+    // update utilSum
+    // update timeline
+  };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 col-span-2">
       <div className="flex items-center gap-x-4 border-b border-gray-900/5 bg-gray-50 p-6">
@@ -23,6 +30,7 @@ export default function RotationFlightComponent({
             <div
               key={rotation.ident}
               className="flex flex-col hover:cursor-pointer hover:bg-gray-100 items-center py-3"
+              onClick={() => handleClick(rotation)}
             >
               <p className="text-gray-500">{rotation.ident}</p>
               <div className="px-2 py-3 flex space-x-52">

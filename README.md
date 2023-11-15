@@ -1,27 +1,13 @@
-# React + TypeScript + Vite
+# Aircraft Scheduling App Elijah Lutay
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Assumption: the ability to reassign the aeroplane to a new identification flight
+- Assumption: not persisting state
+- Assumption: not dealing with dates (only one day)
+- Assumption: There is an inconsistency in the description, saying that the airplanes cannot 'teleport 'without the flight. However, all aircraft are based in 'EGKK', but there are no operating flights from 'EGKK'. (as seen in API example). I am going to make an assumption that you first get a flight by its identification, and then filter by destination and time constraints.
+- Assumption: clicking on new aircraft clears rotation for a new aircraft
+- Assumption: only show flights that are permitted to use
+- Assumption: Using TimelineBar as percentage in respect to time
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Launch:
+- `yarn`
+- `yarn dev`
