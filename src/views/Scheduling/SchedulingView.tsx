@@ -40,7 +40,10 @@ export default function SchedulingView() {
         {flightsData ? (
           <RotationFlightComponent
             rotations={rotations}
+            setRotations={setRotations}
             flightIdent={selectAircraft}
+            filteredFlights={filteredFlights}
+            setFilteredFlights={setFilteredFlights}
           />
         ) : null}
         <FlightComponent

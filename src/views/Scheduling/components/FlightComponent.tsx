@@ -37,7 +37,6 @@ export default function FlightComponent({
       filterFlightsByConstraints(flights, destination, arrivaltime)
     );
     const range: number = flight.arrivaltime - flight.departuretime;
-    console.log(range, "RANGE");
     //calculatePercentage
     setUtilNumber([
       ...utilNumber,

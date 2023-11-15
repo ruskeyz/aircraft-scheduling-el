@@ -1,19 +1,31 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Flights } from "../SchedulingView.types";
+import { SetStateAction } from "react";
 
 interface RotationFlightComponentProps {
   rotations: Flights[];
+  setRotations: React.Dispatch<SetStateAction<Flights[]>>;
   flightIdent: string;
+  filteredFlights: Flights[];
+  setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
 }
 
 export default function RotationFlightComponent({
   rotations,
+  setRotations,
   flightIdent,
+  filteredFlights,
+  setFilteredFlights,
 }: RotationFlightComponentProps) {
   const handleClick = (rotation: Flights) => {
     console.log(rotation);
     // delete from rotations
+    const { ident } = rotation;
+    setRotations(
+      rotations.filter((filterRotations) => filterRotations.ident !== ident)
+    );
     // update flights
+    setFilteredFlights([rotation, ...filteredFlights]);
     // update utilSum
     // update timeline
   };
