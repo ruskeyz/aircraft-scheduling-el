@@ -1,11 +1,11 @@
-import { Flights } from "../SchedulingView.types";
+import { Flight } from "../SchedulingView.types";
 import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 export default function filterFlightsByConstraints(
-  flights: Flights[],
+  flights: Flight[],
   destination: string,
   arrivalTime: number
-): Flights[] {
+): Flight[] {
   // filter flights to match the destination
   const filterByDest = flights.filter(
     (filterFlight) => filterFlight.origin === destination

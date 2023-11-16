@@ -1,15 +1,15 @@
 import { SetStateAction } from "react";
-import { Flights, TimelineData } from "../SchedulingView.types";
+import { Flight, TimelineData } from "../SchedulingView.types";
 import filterFlightsByConstraints from "../helpers/filterFlightsByConstraints";
 import { calculatePercentage } from "../helpers/calculatePercentage";
 import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 interface FlightComponentProps {
-  flights: Flights[];
-  filteredFlights: Flights[];
-  setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
-  rotations: Flights[];
-  setRotations: React.Dispatch<SetStateAction<Flights[]>>;
+  flights: Flight[];
+  filteredFlights: Flight[];
+  setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
+  rotations: Flight[];
+  setRotations: React.Dispatch<SetStateAction<Flight[]>>;
   utilNumber: number[];
   setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
   timelineData: TimelineData[];
@@ -26,7 +26,7 @@ export default function FlightComponent({
   timelineData,
   setTimelineData,
 }: FlightComponentProps) {
-  const handleClick = (flight: Flights) => {
+  const handleClick = (flight: Flight) => {
     // make sure only one flight is there
     if (rotations.indexOf(flight) === -1) {
       setRotations([...rotations, flight]);

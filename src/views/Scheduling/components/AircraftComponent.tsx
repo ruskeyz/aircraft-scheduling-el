@@ -1,16 +1,16 @@
 import { SetStateAction } from "react";
-import { Aircrafts, Flights, TimelineData } from "../SchedulingView.types";
+import { Aircraft, Flight, TimelineData } from "../SchedulingView.types";
 import filterFlightsByIdent from "../helpers/filterByIdent";
 
 interface AircraftComponentProps {
-  aircrafts: Aircrafts[];
+  aircrafts: Aircraft[];
   utilNumber: number[];
   selectAircraft: string;
   setSelectAircraft: React.Dispatch<SetStateAction<string>>;
-  flights: Flights[];
-  setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
-  rotations: Flights[];
-  setRotations: React.Dispatch<SetStateAction<Flights[]>>;
+  flights: Flight[];
+  setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
+  rotations: Flight[];
+  setRotations: React.Dispatch<SetStateAction<Flight[]>>;
   setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
   setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }

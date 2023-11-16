@@ -1,15 +1,15 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Flights, TimelineData } from "../SchedulingView.types";
+import { Flight, TimelineData } from "../SchedulingView.types";
 import { SetStateAction } from "react";
 import { calculatePercentage } from "../helpers/calculatePercentage";
 import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 interface RotationFlightComponentProps {
-  rotations: Flights[];
-  setRotations: React.Dispatch<SetStateAction<Flights[]>>;
+  rotations: Flight[];
+  setRotations: React.Dispatch<SetStateAction<Flight[]>>;
   flightIdent: string;
-  filteredFlights: Flights[];
-  setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
+  filteredFlights: Flight[];
+  setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
   utilNumber: number[];
   setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
   timelineData: TimelineData[];
@@ -27,7 +27,7 @@ export default function RotationFlightComponent({
   timelineData,
   setTimelineData,
 }: RotationFlightComponentProps) {
-  const handleClick = (rotation: Flights) => {
+  const handleClick = (rotation: Flight) => {
     // delete from rotations
     const { ident } = rotation;
     setRotations(

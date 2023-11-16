@@ -1,10 +1,10 @@
-import { Flights } from "../SchedulingView.types";
+import { Flight } from "../SchedulingView.types";
 import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 export default function filterFlightsByIdent(
-  flights: Flights[],
+  flights: Flight[],
   query: string
-): Flights[] {
+): Flight[] {
   const filterFlight = flights.filter((flight) => flight.ident === query);
 
   // cannot take flights after midnight
