@@ -8,7 +8,6 @@ interface AircraftComponentProps {
   selectAircraft: string;
   setSelectAircraft: React.Dispatch<SetStateAction<string>>;
   flights: Flights[];
-  setFlights: React.Dispatch<SetStateAction<Flights[]>>;
   setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
   rotations: Flights[];
   setRotations: React.Dispatch<SetStateAction<Flights[]>>;

@@ -28,7 +28,6 @@ export default function RotationFlightComponent({
   setTimelineData,
 }: RotationFlightComponentProps) {
   const handleClick = (rotation: Flights) => {
-    console.log(rotation);
     // delete from rotations
     const { ident } = rotation;
     setRotations(
@@ -37,7 +36,6 @@ export default function RotationFlightComponent({
     // update flights
     setFilteredFlights([rotation, ...filteredFlights]);
     // update utilSum
-    //calculatePercentage
     const range: number = rotation.arrivaltime - rotation.departuretime;
     const rotationUtilPercent = parseInt(
       calculatePercentage(range, APP_CONSTANTS.MIDNIGHT).toFixed(0)
