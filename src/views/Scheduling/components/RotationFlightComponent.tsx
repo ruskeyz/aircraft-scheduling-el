@@ -69,7 +69,6 @@ export default function RotationFlightComponent({
                 </dd>
               </div>
               <div>
-                {" "}
                 <ArrowRightIcon className="h-10 w-10" />
               </div>
               <div className="px-2 py-3 flex justify-end space-x-52">
