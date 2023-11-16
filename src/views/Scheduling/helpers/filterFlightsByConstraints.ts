@@ -6,20 +6,17 @@ export default function filterFlightsByConstraints(
   destination: string,
   arrivalTime: number
 ): Flight[] {
-  // filter flights to match the destination
-  const filterByDest = flights.filter(
-    (filterFlight) => filterFlight.origin === destination
-  );
-  // get the list that departs after arrivalTime
-  const filterByTime = filterByDest.filter(
-    (filterFlight) => filterFlight.departuretime > arrivalTime
-  );
+  const res: Flight[] = [];
 
-  // cannot take flights after midnight
-  const filterByMidnight = filterByTime.filter(
-    (filterFlight) => filterFlight.arrivaltime < APP_CONSTANTS.MIDNIGHT
-  );
+  for (const flight of flights) {
+    // filter flights to match the destination
+    if (flight.origin !== destination) continue;
+    // get the list that departs after arrivalTime
+    if (flight.departuretime <= arrivalTime) continue;
+    // cannot take flights after midnight
+    if (flight.arrivaltime > APP_CONSTANTS.MIDNIGHT) continue;
+    res.push(flight);
+  }
 
-  const res = filterByMidnight;
   return res;
 }
