@@ -1,6 +1,8 @@
 import { SetStateAction } from "react";
 import { Flights, TimelineData } from "../SchedulingView.types";
 import filterFlightsByConstraints from "../helpers/filterFlightsByConstraints";
+import { calculatePercentage } from "../helpers/calculatePercentage";
+import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 interface FlightComponentProps {
   flights: Flights[];
@@ -13,9 +15,6 @@ interface FlightComponentProps {
   timelineData: TimelineData[];
   setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
-const calculatePercentage = (partialValue: number, totalValue: number) => {
-  return (100 * partialValue) / totalValue;
-};
 export default function FlightComponent({
   flights,
   filteredFlights,
@@ -36,27 +35,31 @@ export default function FlightComponent({
     setFilteredFlights(
       filterFlightsByConstraints(flights, destination, arrivaltime)
     );
-    const range: number = flight.arrivaltime - flight.departuretime;
+
     //calculatePercentage
-    setUtilNumber([
-      ...utilNumber,
-      parseInt(calculatePercentage(range, 86400).toFixed(0)),
-    ]);
+    const range: number = flight.arrivaltime - flight.departuretime;
+    const flightUtilpercent = parseInt(
+      calculatePercentage(range, APP_CONSTANTS.MIDNIGHT).toFixed(0)
+    );
+    setUtilNumber([...utilNumber, flightUtilpercent]);
 
     // set timelineData
     setTimelineData([
       ...timelineData,
       {
+        ident: flight.ident,
         turnaround: true,
         departureTime: flight.departuretime - 1200,
         arrivalTime: flight.arrivaltime - 1200,
       },
       {
+        ident: flight.ident,
         turnaround: false,
         departureTime: flight.departuretime,
         arrivalTime: flight.arrivaltime,
       },
       {
+        ident: flight.ident,
         turnaround: true,
         departureTime: flight.departuretime + 1200,
         arrivalTime: flight.arrivaltime + 1200,

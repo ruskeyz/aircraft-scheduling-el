@@ -1,6 +1,8 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Flights } from "../SchedulingView.types";
+import { Flights, TimelineData } from "../SchedulingView.types";
 import { SetStateAction } from "react";
+import { calculatePercentage } from "../helpers/calculatePercentage";
+import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 interface RotationFlightComponentProps {
   rotations: Flights[];
@@ -8,6 +10,10 @@ interface RotationFlightComponentProps {
   flightIdent: string;
   filteredFlights: Flights[];
   setFilteredFlights: React.Dispatch<SetStateAction<Flights[]>>;
+  utilNumber: number[];
+  setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
+  timelineData: TimelineData[];
+  setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
 
 export default function RotationFlightComponent({
@@ -16,6 +22,10 @@ export default function RotationFlightComponent({
   flightIdent,
   filteredFlights,
   setFilteredFlights,
+  utilNumber,
+  setUtilNumber,
+  timelineData,
+  setTimelineData,
 }: RotationFlightComponentProps) {
   const handleClick = (rotation: Flights) => {
     console.log(rotation);
@@ -27,7 +37,16 @@ export default function RotationFlightComponent({
     // update flights
     setFilteredFlights([rotation, ...filteredFlights]);
     // update utilSum
+    //calculatePercentage
+    const range: number = rotation.arrivaltime - rotation.departuretime;
+    const rotationUtilPercent = parseInt(
+      calculatePercentage(range, APP_CONSTANTS.MIDNIGHT).toFixed(0)
+    );
+    setUtilNumber(utilNumber.filter((value) => value !== rotationUtilPercent));
     // update timeline
+    setTimelineData(
+      timelineData.filter((filterRotation) => filterRotation.ident !== ident)
+    );
   };
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 col-span-2">

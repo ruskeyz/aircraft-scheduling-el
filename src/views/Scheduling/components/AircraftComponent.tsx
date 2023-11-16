@@ -1,7 +1,6 @@
 import { SetStateAction } from "react";
-import { Aircrafts, ChartData, Flights } from "../SchedulingView.types";
+import { Aircrafts, Flights, TimelineData } from "../SchedulingView.types";
 import filterFlightsByIdent from "../helpers/filterByIdent";
-import { initChartData } from "../SchedulingView";
 
 interface AircraftComponentProps {
   aircrafts: Aircrafts[];
@@ -14,6 +13,7 @@ interface AircraftComponentProps {
   rotations: Flights[];
   setRotations: React.Dispatch<SetStateAction<Flights[]>>;
   setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
+  setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
 export default function AircraftComponent({
   aircrafts,
@@ -25,6 +25,7 @@ export default function AircraftComponent({
   rotations,
   setRotations,
   setUtilNumber,
+  setTimelineData,
 }: AircraftComponentProps) {
   const utilSum: number = utilNumber.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
@@ -33,9 +34,14 @@ export default function AircraftComponent({
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const selected = e.currentTarget.value;
     setSelectAircraft(selected);
+    //fix the first available flight, filter by ident
     setFilteredFlights(filterFlightsByIdent(flights, selected));
+    //reset rotations
     setRotations(rotations.filter((r) => r.ident === selected));
+    //reset utilNumber
     setUtilNumber([]);
+    //reset timelineData
+    setTimelineData([]);
   };
 
   return (

@@ -14,6 +14,7 @@ export interface Flights {
   destination: string;
 }
 export interface TimelineData {
+  ident: string;
   turnaround: boolean;
   departureTime: number;
   arrivalTime: number;

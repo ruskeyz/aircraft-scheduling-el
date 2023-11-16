@@ -36,6 +36,7 @@ export default function SchedulingView() {
           rotations={rotations}
           setRotations={setRotations}
           setUtilNumber={setUtilNumber}
+          setTimelineData={setTimelineData}
         />
         {flightsData ? (
           <RotationFlightComponent
@@ -44,6 +45,10 @@ export default function SchedulingView() {
             flightIdent={selectAircraft}
             filteredFlights={filteredFlights}
             setFilteredFlights={setFilteredFlights}
+            utilNumber={utilNumber}
+            setUtilNumber={setUtilNumber}
+            timelineData={timelineData}
+            setTimelineData={setTimelineData}
           />
         ) : null}
         <FlightComponent
