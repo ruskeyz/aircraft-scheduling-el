@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import { Flight, TimelineData } from "../SchedulingView.types";
+import { Flight, TimelineData, UtilNumber } from "../SchedulingView.types";
 import filterFlightsByConstraints from "../helpers/filterFlightsByConstraints";
 import { calculatePercentage } from "../helpers/calculatePercentage";
 import * as APP_CONSTANTS from "../../../constants/appConstants";
@@ -10,8 +10,8 @@ interface FlightComponentProps {
   setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
   rotations: Flight[];
   setRotations: React.Dispatch<SetStateAction<Flight[]>>;
-  utilNumber: number[];
-  setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
+  utilNumber: UtilNumber[];
+  setUtilNumber: React.Dispatch<SetStateAction<UtilNumber[]>>;
   timelineData: TimelineData[];
   setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
@@ -41,7 +41,13 @@ export default function FlightComponent({
     const flightUtilpercent = parseInt(
       calculatePercentage(range, APP_CONSTANTS.MIDNIGHT).toFixed(0)
     );
-    setUtilNumber([...utilNumber, flightUtilpercent]);
+    setUtilNumber([
+      ...utilNumber,
+      {
+        ident: flight.ident,
+        value: flightUtilpercent,
+      },
+    ]);
 
     // set timelineData
     setTimelineData([

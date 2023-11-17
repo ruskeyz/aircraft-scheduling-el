@@ -19,3 +19,7 @@ export interface TimelineData {
   departureTime: number;
   arrivalTime: number;
 }
+export interface UtilNumber {
+  ident: string;
+  value: number;
+}

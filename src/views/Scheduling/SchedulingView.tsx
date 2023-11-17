@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { Flight, TimelineData } from "./SchedulingView.types";
+import { Flight, TimelineData, UtilNumber } from "./SchedulingView.types";
 import AircraftComponent from "./components/AircraftComponent";
 import FlightComponent from "./components/FlightComponent";
 import RotationFlightComponent from "./components/RotationFlightComponent";
@@ -13,7 +13,7 @@ export default function SchedulingView() {
   const [selectAircraft, setSelectAircraft] = useState("");
   const [filteredFlights, setFilteredFlights] = useState<Flight[]>([]);
   const [rotations, setRotations] = useState<Flight[]>([]);
-  const [utilNumber, setUtilNumber] = useState<number[]>([]);
+  const [utilNumber, setUtilNumber] = useState<UtilNumber[]>([]);
   const [timelineData, setTimelineData] = useState<TimelineData[]>([]);
 
   const {

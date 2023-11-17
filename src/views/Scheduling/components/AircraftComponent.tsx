@@ -1,17 +1,22 @@
 import { SetStateAction } from "react";
-import { Aircraft, Flight, TimelineData } from "../SchedulingView.types";
+import {
+  Aircraft,
+  Flight,
+  TimelineData,
+  UtilNumber,
+} from "../SchedulingView.types";
 import filterFlightsByIdent from "../helpers/filterByIdent";
 
 interface AircraftComponentProps {
   aircrafts: Aircraft[];
-  utilNumber: number[];
+  utilNumber: UtilNumber[];
+  setUtilNumber: React.Dispatch<SetStateAction<UtilNumber[]>>;
   selectAircraft: string;
   setSelectAircraft: React.Dispatch<SetStateAction<string>>;
   flights: Flight[];
   setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
   rotations: Flight[];
   setRotations: React.Dispatch<SetStateAction<Flight[]>>;
-  setUtilNumber: React.Dispatch<SetStateAction<number[]>>;
   setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
 export default function AircraftComponent({
@@ -26,9 +31,12 @@ export default function AircraftComponent({
   setUtilNumber,
   setTimelineData,
 }: AircraftComponentProps) {
-  const utilSum: number = utilNumber.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue;
-  }, 0);
+  //calcualte the UtilNumber % sum
+  const utilSum: number = utilNumber
+    .map((i) => i.value)
+    .reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const selected = e.currentTarget.value;
