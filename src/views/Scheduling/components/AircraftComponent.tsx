@@ -17,6 +17,7 @@ interface AircraftComponentProps {
   setFilteredFlights: React.Dispatch<SetStateAction<Flight[]>>;
   rotations: Flight[];
   setRotations: React.Dispatch<SetStateAction<Flight[]>>;
+  timelineData: TimelineData[];
   setTimelineData: React.Dispatch<SetStateAction<TimelineData[]>>;
 }
 export default function AircraftComponent({
@@ -29,6 +30,7 @@ export default function AircraftComponent({
   rotations,
   setRotations,
   setUtilNumber,
+  timelineData,
   setTimelineData,
 }: AircraftComponentProps) {
   //calcualte the UtilNumber % sum
@@ -46,9 +48,9 @@ export default function AircraftComponent({
     //reset rotations
     setRotations(rotations.filter((r) => r.ident === selected));
     //reset utilNumber
-    setUtilNumber([]);
+    setUtilNumber(utilNumber.filter((u) => u.ident === selected));
     //reset timelineData
-    setTimelineData([]);
+    setTimelineData(timelineData.filter((t) => t.ident === selected));
   };
 
   return (

@@ -1,8 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Flight, TimelineData, UtilNumber } from "../SchedulingView.types";
 import { SetStateAction } from "react";
-//import { calculatePercentage } from "../helpers/calculatePercentage";
-//import * as APP_CONSTANTS from "../../../constants/appConstants";
 
 interface RotationFlightComponentProps {
   rotations: Flight[];
@@ -33,14 +31,11 @@ export default function RotationFlightComponent({
     setRotations(
       rotations.filter((filterRotations) => filterRotations.ident !== ident)
     );
-    // update flights
-    setFilteredFlights([rotation, ...filteredFlights]);
+    // update flights, make sure its not already in the list
+    if (filteredFlights.indexOf(rotation) === -1) {
+      setFilteredFlights([rotation, ...filteredFlights]);
+    }
     // update utilSum
-    //const range: number = rotation.arrivaltime - rotation.departuretime;
-    //const rotationUtilPercent = parseInt(
-    //calculatePercentage(range, APP_CONSTANTS.MIDNIGHT).toFixed(0)
-    //);
-    //console.log(rotationUtilPercent, "rotation %");
     setUtilNumber(utilNumber.filter((value) => value.ident !== rotation.ident));
     // update timeline
     setTimelineData(

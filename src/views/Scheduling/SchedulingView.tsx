@@ -70,6 +70,7 @@ export default function SchedulingView() {
             rotations={rotations}
             setRotations={setRotations}
             setUtilNumber={setUtilNumber}
+            timelineData={timelineData}
             setTimelineData={setTimelineData}
           />
           <RotationFlightComponent
